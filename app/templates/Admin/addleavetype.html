@@ -1,0 +1,69 @@
+
+{% extends 'base.html'%}
+{% load tz %} 
+{% block title %}<title>Add_leave_type</title>{% endblock %}
+
+   
+
+{% block css %}
+.addholiday{
+    margin-left: 30rem;
+              }
+
+  .push {
+    margin-left:320px;
+    margin-top:45px;
+    width:70%
+        }
+
+    .homelink {
+            color: black;
+            opacity: 0.7;
+            font-weight:normal;
+            
+        }
+    .home{
+            background-color: #DCF9F3;
+            color: rgb(14, 5, 5);
+        }
+    .home:hover {
+            background-color: #DCF9F3;
+            color: white;
+        }
+
+        #addleavetype {
+            background-color: #5DC2AE;
+            font-weight: bold;
+             
+         }
+         
+         
+         #adh {   
+             color:white;
+         }
+{% endblock %}
+
+
+    
+{% block content %}
+
+<div class="push" class="form-group" >
+    <form action="" method='POST' >
+        <H3>Add LeaveType </H3>
+        <br>
+        {% csrf_token %}
+        <label for="Add_Leave_type">Add_Leave_type</label>
+        <input type="text" id="Add_Leave_type" name="Add_Leave_type" required >
+        <br>
+        <br>
+        <label for="Balance">Balance</label>
+        <input type="text" id="Balance" name="Balance" required>
+        <br><br>
+        <button type="submit" class="btn btn-dark">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
+
+
+    

@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+<title>Leaves</title>
+
+{% block extra_content %}
+
+{% endblock %}
+
+{% block css %}
+h6 {
+display:inline-block
+}
+.push {
+margin-top:45px;
+margin-left:300px;
+width:100%;
+}
+.flex {
+display:flex;
+justify-content:space-between;
+}
+
+#leave {
+    background-color: #5DC2AE;
+    font-weight: bold;
+     
+ }
+
+  #leaveid {
+     color:white;
+ } 
+ 
+ .homelink {
+     color: black;
+     opacity: 0.7;
+     font-weight:normal;
+     
+ }
+ .home{
+    background-color: #DCF9F3;
+    color: rgb(14, 5, 5);
+}
+.home:hover {
+    background-color: #DCF9F3;
+    color: white;
+}
+
+.flexy{
+    display:flex;
+    justify-content:space-between;
+}
+.alias {
+    background-color: #5DC2AE;
+    text-decoration: none;
+    color:white;
+    padding:5px;
+    border-radius:25px;
+
+}
+
+
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="push">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    
+
+    <form action="" method="POST">
+        <div class="flex">
+            <div class="form-group">
+                <div class="flexy">
+                    <h3>Apply Leaves</h1>
+                    <div> 
+                        <a class="alias" href="{% url  'leavehistory' %}">Leave history</a>
+                    </div>
+                    
+                </div>
+                
+                {% csrf_token %}
+
+                <label for="Leave_type" class="form-label">Role : </label>
+                <select name="Leave_type" class="form-select">
+                    {% for type in leavetypes %}
+                    <option selected value="{{type.leavetype}}" >{{ type.leavetype }}</option>
+                        
+                    {% endfor %}
+                </select>
+
+
+                <br>
+                <br>
+
+                <label for="From Date">From Date</label>
+                <input type="date" name="From Date" id="From Date" required>
+
+                <label for="F_session"></label>
+                <select name="F_session" id="F_session" class="form-control">
+                    <option value="session_1">session_1</option>
+                    <option value="session_2">session_2</option>
+                </select>
+
+                <br>
+                
+                <label for="To Date">To Date</label>
+                <input type="date" name="To Date" id="To Date" required>
+
+                
+                <label for="T_session"></label>
+                <select name="T_session" id="T_session" class="form-control" required>
+                    <option value="session_1">session_1</option>
+                    <option value="session_2">session_2</option>
+                </select>
+
+                <br>
+                
+
+                <label for="Reason">Reason</label>
+                <textarea name="Reason" id="Reason" cols="60" rows="05" class="form-control"></textarea>
+                <br><br>
+                
+
+                <button type="reset" class="btn btn-primary">Reset</button>
+
+                <button type="submit" class="btn btn-secondary" class="sbutton">Submit</button>
+            </div>
+
+
+
+            <div class="history">
+                
+            </div>
+
+
+        </div>
+
+    </form>
+
+
+</div>
+
+{% endblock %}

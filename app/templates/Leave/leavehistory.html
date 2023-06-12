@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+<title>{% block title %}Leave History{% endblock %}</title>
+
+{% block extra_content %}
+
+{% endblock %}
+
+{% block css %}
+    .push {
+        margin-left:320px;
+    }
+    #leave {
+        background-color: #5DC2AE;
+        font-weight: bold;
+         
+     }
+  
+      #leaveid {
+         color:white;
+     } 
+     
+     .homelink {
+         color: black;
+         opacity: 0.7;
+         font-weight:normal;
+         
+     }
+     .home{
+        background-color: #DCF9F3;
+        color: rgb(14, 5, 5);
+    }
+    .home:hover {
+        background-color: #DCF9F3;
+        color: white;
+    }
+{% endblock %}
+
+{% block content %}
+    <div class="push">
+        <h3>Leave History</h3>
+        {% for leave in leaves %}
+        
+        {% if leave.Emp == user %}
+            <table class="table">
+                <tr scope="col">
+                <th scope="col">
+                Employee_email
+                </th>
+
+                <th scope="col">
+                Leave_type
+                </th>
+                <th scope="col">
+                From_date
+                </th>
+
+                <th scope="col">
+                    Leave_date
+                    </th>
+
+                <th scope="col">
+                Status
+                </th>
+
+                <th>
+                    Approved_by
+                </th>
+
+                <th>
+                    Approved_on
+                </th>
+
+
+                </tr>
+                <tr scope="row">
+                <td>{{ leave.Emp.email }}</td>
+
+
+                {% for typ in types %}
+                {%  if typ.leavetype == leave.Leave_type %}
+                       
+                <td>{{typ.leavetype}}</td>
+                {% endif %}
+           
+                {% endfor %}
+                <td>{{ leave.Leave_date}} </td>
+                <td>{{ leave.To_date}} </td>
+
+                <td>
+                {% if leave.Is_approved == True %}
+                approved
+                {% elif leave.Is_approved == False %}
+                Rejected
+                {% else %} 
+                pending
+                {% endif %}
+                </td>
+                {% if leave.Is_approved == True %}
+                <td>
+                    {{leave.approved_by.username}}
+                </td>
+                <td>
+                    {{leave.approved_on}}
+                </td>
+                {% elif leave.Is_approved != False %}
+                <td>
+                    <p>Yet to review</p>
+                </td>
+                <td>
+                    <p>Yet to review</p>
+                </td>
+
+                {% endif %}
+            </tr>
+    </table>
+
+
+
+    {% endif %}
+    {% endfor %}
+    {% endblock %}
+
+    </div>
+    
